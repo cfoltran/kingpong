@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:kingpong/pong_game.dart';
 
-class Paddle extends PositionComponent with HasGameRef<PongGame> {
+class Paddle extends PositionComponent
+    with HasGameRef<PongGame>, DragCallbacks {
   static const double paddleWidth = 100;
   static const double paddleHeight = 20;
 
@@ -22,5 +24,12 @@ class Paddle extends PositionComponent with HasGameRef<PongGame> {
   void render(Canvas canvas) {
     super.render(canvas);
     canvas.drawRect(size.toRect(), Paint()..color = const Color(0xFFFFFFFF));
+  }
+
+  @override
+  void onDragUpdate(DragUpdateEvent event) {
+    double delta = event.localDelta.x;
+    double newX = position.x + delta;
+    position.x = newX.clamp(paddleWidth / 2, gameRef.size.x - paddleWidth / 2);
   }
 }
