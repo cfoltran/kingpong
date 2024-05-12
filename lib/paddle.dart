@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:kingpong/pong_game.dart';
@@ -18,6 +19,7 @@ class Paddle extends PositionComponent
   Future<void> onLoad() async {
     await super.onLoad();
     position = Vector2(gameRef.size.x / 2, gameRef.size.y - 100);
+    add(RectangleHitbox());
   }
 
   @override
