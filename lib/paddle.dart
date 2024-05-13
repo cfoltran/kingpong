@@ -9,8 +9,9 @@ class Paddle extends PositionComponent
     with HasGameRef<PongGame>, DragCallbacks {
   static const double paddleWidth = 100;
   static const double paddleHeight = 20;
+  final bool top;
 
-  Paddle() {
+  Paddle({this.top = false}) {
     size = Vector2(paddleWidth, paddleHeight);
     anchor = Anchor.center;
   }
@@ -18,7 +19,7 @@ class Paddle extends PositionComponent
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    position = Vector2(gameRef.size.x / 2, gameRef.size.y - 100);
+    position = Vector2(gameRef.size.x / 2, top ? 0 : (gameRef.size.y - 100));
     add(RectangleHitbox());
   }
 

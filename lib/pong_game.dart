@@ -36,7 +36,8 @@ class PongGame extends FlameGame with HasCollisionDetection, TapCallbacks {
     gameAssets = GameAssets();
     gameAssets.initialAssets();
     await world.addAll([
-      gameAssets.player,
+      gameAssets.player1,
+      gameAssets.player2,
       gameAssets.ball,
       ScreenHitbox(),
     ]);
